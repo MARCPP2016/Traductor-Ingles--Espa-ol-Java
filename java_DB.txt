@@ -1,0 +1,59 @@
+/*
+ * Concetar base de datos java
+ * 
+ * -Declaramos Variables strings(url,user,password)
+ * -Abrimos interface conexion con manejo de excepciones!!
+ * -variable stament(pasamos comando sql por parametro)
+ * -Ejecutamos sql
+ * -Traemos datos y recorremos tabla
+ * 
+ * Marcelo Borello 3/02/19
+ * */
+
+package mi_proyecto;
+
+
+import java.awt.*;
+import java.util.*;
+import java.sql.*;
+public class Auto {
+
+
+	public static final String url = "jdbc:mysql://localhost:3306/animales";
+	public static final String user = "root";
+	public static final String pas = "";
+
+	
+	public static void main(String[] args) {
+     	
+	try{
+		
+		// 1-Crear conexion
+	   Connection con = DriverManager.getConnection(url,user,pas);
+		
+		//2- Crear objeto statement
+		Statement  mistatment =con.createStatement();
+	
+		//3-Ejecutar sql
+		
+		ResultSet re=mistatment.executeQuery("SELECT * FROM `hoja1`");
+		
+		//4-RECORREMOS LA TABLA
+		
+		while(re.next())
+		{
+			
+		System.out.print(re.getString("id")+"\n"+" "+re.getString("b")+" "+re.getString("c")+" "+re.getString("d"));	
+			
+		}
+		
+	} catch(Exception e){
+		System.out.print("No conectado \n"+e.toString());
+		
+	}
+		
+		
+
+	}
+
+}
